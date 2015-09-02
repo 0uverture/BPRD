@@ -8,5 +8,7 @@ namespace Assingment1
 {
     abstract class Binop : Expr
     {
+        public Expr E1;
+        public Expr E2;
     }
 }

@@ -18,5 +18,15 @@ namespace Assingment1
         {
             Value = value;
         }
+
+        public override int Eval(List<Tuple<string, int>> env)
+        {
+            return env.Find(x => x.Item1.Equals(Value)).Item2;
+        }
+
+        public override Expr Simplify()
+        {
+            return this;
+        }
     }
 }

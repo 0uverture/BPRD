@@ -18,5 +18,15 @@ namespace Assingment1
         {
             Value = value;
         }
+
+        public override int Eval(List<Tuple<string, int>> env)
+        {
+            return Value;
+        }
+
+        public override Expr Simplify()
+        {
+            return this;
+        }
     }
 }
