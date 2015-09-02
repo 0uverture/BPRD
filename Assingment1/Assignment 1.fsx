@@ -124,3 +124,101 @@ let rec diff (ae:aexpr) : aexpr =
 
 let aexpr6 = Mul(Var "x", CstI 3)
 simplify <| diff aexpr6
+
+//2,1
+type expr = 
+  | CstI of int
+  | Var of string
+  | Let of (string * expr) list * expr
+  | Prim of string * expr * expr;;
+(* Some closed expressions: *)
+(* ---------------------------------------------------------------------- *)
+(* Evaluation of expressions with variables and bindings *)
+let rec lookup env x =
+    match env with 
+    | []        -> failwith (x + " not found")
+    | (y, v)::r -> if x=y then v else lookup r x;;
+let rec eval e (env : (string * int) list) : int =
+    match e with
+    | CstI i            -> i
+    | Var x             -> lookup env x 
+    | Let([], ebody) -> eval ebody env
+    | Let((x,ex)::xs, ebody) ->
+        let xval = eval ex env
+        let env1 = (x, xval) :: env
+        if xs = [] then eval ebody env1 else eval (Let(xs, ebody)) env1
+    | Prim("+", e1, e2) -> eval e1 env + eval e2 env
+    | Prim("*", e1, e2) -> eval e1 env * eval e2 env
+    | Prim("-", e1, e2) -> eval e1 env - eval e2 env
+    | Prim _            -> failwith "unknown primitive";;
+let run e = eval e [];;
+(* ---------------------------------------------------------------------- *)
+
+//2,2
+(* Closedness *)
+// let mem x vs = List.exists (fun y -> x=y) vs;;
+let rec mem x vs = 
+    match vs with
+    | []      -> false
+    | v :: vr -> x=v || mem x vr;;
+(* union(xs, ys) is the set of all elements in xs or ys, without duplicates *)
+let rec union (xs, ys) = 
+    match xs with 
+    | []    -> ys
+    | x::xr -> if mem x ys then union(xr, ys)
+               else x :: union(xr, ys);;
+(* minus xs ys  is the set of all elements in xs but not in ys *)
+let rec minus (xs, ys) = 
+    match xs with 
+    | []    -> []
+    | x::xr -> if mem x ys then minus(xr, ys)
+               else x :: minus (xr, ys);;
+let rec freevars e : string list =
+    match e with
+    | CstI i -> []
+    | Var x  -> [x]
+    | Let([], ebody) -> freevars ebody
+    | Let((x, ex)::xs, ebody) ->
+        if xs = [] then union (freevars ex, minus (freevars ebody, [x]))
+        else minus (freevars ex, [x])
+    | Prim(ope, e1, e2) -> union (freevars e1, freevars e2)
+(* ---------------------------------------------------------------------- *)
+
+//2,3
+(* Compilation to target expressions with numerical indexes instead of
+   symbolic variable names.  *)
+type texpr =                            (* target expressions *)
+  | TCstI of int
+  | TVar of int                         (* index into runtime environment *)
+  | TLet of texpr * texpr               (* erhs and ebody                 *)
+  | TPrim of string * texpr * texpr;;
+(* Map variable name to variable index at compile-time *)
+let rec getindex vs x = 
+    match vs with 
+    | []    -> failwith "Variable not found"
+    | y::yr -> if x=y then 0 else 1 + getindex yr x;;
+let rec tcomp (e : expr) (cenv : string list) : texpr =
+    match e with
+    | CstI i -> TCstI i
+    | Var x  -> TVar (getindex cenv x)
+    | Let((x,ex)::xs, ebody) ->
+        let cenv1 = x :: cenv     
+        if xs = [] then TLet(tcomp ex cenv, tcomp ebody cenv1) else TLet(tcomp ex cenv, tcomp (Let(xs, ebody)) cenv1)
+    | Prim(ope, e1, e2) -> TPrim(ope, tcomp e1 cenv, tcomp e2 cenv);;
+(* Evaluation of target expressions with variable indexes.  The
+   run-time environment renv is a list of variable values (ints).  *)
+let rec teval (e : texpr) (renv : int list) : int =
+    match e with
+    | TCstI i -> i
+    | TVar n  -> List.nth renv n
+    | TLet(erhs, ebody) -> 
+      let xval = teval erhs renv
+      let renv1 = xval :: renv 
+      teval ebody renv1 
+    | TPrim("+", e1, e2) -> teval e1 renv + teval e2 renv
+    | TPrim("*", e1, e2) -> teval e1 renv * teval e2 renv
+    | TPrim("-", e1, e2) -> teval e1 renv - teval e2 renv
+    | TPrim _            -> failwith "unknown primitive";;
+let i = Let([], Let(["x1", Prim("+", Var "x1", CstI 4)], Prim("+", Var "x1", CstI 3))) // []
+let fault = Let([("x1", Prim("+", Var "x1", CstI 7))], Prim("+", Var "x1", CstI 8)) // [x1]
+let l = Let ([("x1", Prim("+", CstI 5, CstI 7)); ("x2", Prim("*", Var "x1", CstI 2))], Prim("+", Var "x1", Var "x2"))
