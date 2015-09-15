@@ -1,3 +1,8 @@
+Exercise 3.2
+a?(b+a?)*
+
+Exercise 3.3
+
 Expr EOF (Rule A)
 LET NAME EQ Expr IN Expr END EOF (Rule F)
 LET NAME EQ Expr IN Expr TIMES Expr END EOF (Rule G)
