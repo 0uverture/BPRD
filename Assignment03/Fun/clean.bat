@@ -1,2 +1,2 @@
-DEL ExprLex.fs ExprPar.fs ExprPar.fsi ExprPar.fsyacc.output
+DEL FunLex.fs FunPar.fs FunPar.fsi FunPar.fsyacc.output
 PAUSE
