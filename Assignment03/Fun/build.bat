@@ -1,4 +1,4 @@
-bin\fsyacc --module ExprPar ExprPar.fsy -v
+bin\fsyacc --module FunPar FunPar.fsy
 PAUSE
-bin\fslex --unicode ExprLex.fsl
+bin\fslex --unicode FunLex.fsl
 PAUSE
