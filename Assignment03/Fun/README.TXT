@@ -17,9 +17,9 @@ A. Loading the micro-ML evaluator, with abstract syntax only
 
 B. Generating and compiling the lexer and parser, and loading them:
 
-   bin\fsyacc --module FunPar FunPar.fsy
-   bin\fslex --unicode FunLex.fsl
-   fsharpi -r ~/fsharp/FsLexYacc.Runtime.dll Absyn.fs FunPar.fs FunLex.fs Parse.fs   
+   bin/fsyacc --module FunPar FunPar.fsy
+   bin/fslex --unicode FunLex.fsl
+   fsi -r bin/FsLexYacc.Runtime.dll Absyn.fs FunPar.fs FunLex.fs Parse.fs   
 
    open Parse;;
    let e1 = fromString "5+7";;
@@ -29,9 +29,9 @@ B. Generating and compiling the lexer and parser, and loading them:
 
 C. Using the lexer, parser and first-order evaluator together:
 
-   fsyacc --module FunPar FunPar.fsy
-   fslex --unicode FunLex.fsl
-   fsharpi -r ~/fsharp/FsLexYacc.Runtime.dll Absyn.fs FunPar.fs FunLex.fs Parse.fs Fun.fs ParseAndRun.fs
+   bin/fsyacc --module FunPar FunPar.fsy
+   bin/fslex --unicode FunLex.fsl
+   fsi -r bin/fsharp/FsLexYacc.Runtime.dll Absyn.fs FunPar.fs FunLex.fs Parse.fs Fun.fs ParseAndRun.fs
 
    open ParseAndRun;;
    run (fromString "5+7");;
