@@ -7,7 +7,7 @@ archive fun2.zip (lecture 4) contains additional files used in points D-F.
 
 A. Loading the micro-ML evaluator, with abstract syntax only
 
-   fsharpi Absyn.fs Fun.fs
+   fsi Absyn.fs Fun.fs
 
    open Absyn;;
    open Fun;;
@@ -17,8 +17,8 @@ A. Loading the micro-ML evaluator, with abstract syntax only
 
 B. Generating and compiling the lexer and parser, and loading them:
 
-   fsyacc --module FunPar FunPar.fsy
-   fslex --unicode FunLex.fsl
+   bin\fsyacc --module FunPar FunPar.fsy
+   bin\fslex --unicode FunLex.fsl
    fsharpi -r ~/fsharp/FsLexYacc.Runtime.dll Absyn.fs FunPar.fs FunLex.fs Parse.fs   
 
    open Parse;;

@@ -80,7 +80,7 @@ type nonTerminalId =
     | NONTERM_AppExpr
     | NONTERM_Const
 
-// This function maps tokens to integers indexes
+// This function maps tokens to integer indexes
 let tagOfToken (t:token) = 
   match t with
   | EOF  -> 0 
@@ -110,7 +110,7 @@ let tagOfToken (t:token) =
   | NAME _ -> 24 
   | CSTINT _ -> 25 
 
-// This function maps integers indexes to symbolic token ids
+// This function maps integer indexes to symbolic token ids
 let tokenTagToTokenId (tokenIdx:int) = 
   match tokenIdx with
   | 0 -> TOKEN_EOF 
