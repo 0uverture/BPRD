@@ -59,9 +59,6 @@ let rec eval (e : expr) (env : value env) : int =
       let fClosure = lookup env f
       match fClosure with
       | Closure (f, x, fBody, fDeclEnv) ->
-        (*let lel = List.Cons [("a","b")] x
-        let lol = List.Cons [] eArg*)
-        printf("asdasdads");
         let s = List.map (fun e -> Int(eval e env)) eArg
         let xVals = List.zip x s 
         let fBodyEnv = xVals @ (f, fClosure) :: fDeclEnv
