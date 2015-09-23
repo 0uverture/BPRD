@@ -59,7 +59,11 @@ let rec eval (e : expr) (env : value env) : int =
       let fClosure = lookup env f
       match fClosure with
       | Closure (f, x, fBody, fDeclEnv) ->
-        let xVals = List.zip(x, (List.map(fun e -> Int(eval e env)) eArg)) 
+        (*let lel = List.Cons [("a","b")] x
+        let lol = List.Cons [] eArg*)
+        printf("asdasdads");
+        let s = List.map (fun e -> Int(eval e env)) eArg
+        let xVals = List.zip x s 
         let fBodyEnv = xVals @ (f, fClosure) :: fDeclEnv
         eval fBody fBodyEnv
       | _ -> failwith "eval Call: not a function"
@@ -71,7 +75,7 @@ let run e = eval e [];;
 
 (* Examples in abstract syntax *)
 
-let ex1 = Letfun("f1", "x", Prim("+", Var "x", CstI 1), 
+(*let ex1 = Letfun("f1", "x", Prim("+", Var "x", CstI 1), 
                  Call(Var "f1", CstI 12));;
 
 (* Example: factorial *)
@@ -114,3 +118,4 @@ let ex5 =
                           Call(Var "fib", Prim("-", Var "n", CstI 2))),
                      CstI 1), Call(Var "fib", CstI 25)));;
                      
+                     *)

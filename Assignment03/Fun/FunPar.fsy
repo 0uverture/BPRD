@@ -9,7 +9,6 @@
 
 %token <int> CSTINT
 %token <string> NAME
-%token <string list> NAMELIST
 %token <bool> CSTBOOL
 
 %token ELSE END FALSE IF IN LET NOT THEN TRUE
@@ -27,8 +26,9 @@
 
 %start Main
 %type <Absyn.expr> Main Expr AtExpr Const
-%type <Absyn.expr list> AppExprList
 %type <Absyn.expr> AppExpr
+%type <Absyn.expr list> AppExprList
+%type <string list> NAMELIST
 
 %%
 
@@ -66,6 +66,15 @@ AppExpr:
     AtExpr AppExprList                       { Call($1, $2)           }
   | AppExpr AppExprList                      { Call($1, $2)           }
 ;
+
+AppExprList:
+  AtExpr                               { [$1]}
+  | AtExpr AppExprList                 {$1 :: $2}    
+
+
+NAMELIST:
+  NAME                               { [$1]}
+  | NAME NAMELIST                 {$1 :: $2}    
 
 Const:
     CSTINT                              { CstI($1)               }
