@@ -1,6 +1,6 @@
 %{
  (* File Fun/FunPar.fsy 
-    Parser for micro-ML, a small functional language; one-argument functions.
+    Parser for micro-ML, a small functional language; two-argument functions.
     sestoft@itu.dk * 2009-10-19
   *)
 
@@ -9,6 +9,7 @@
 
 %token <int> CSTINT
 %token <string> NAME
+%token <string list> NAMELIST
 %token <bool> CSTBOOL
 
 %token ELSE END FALSE IF IN LET NOT THEN TRUE
@@ -26,6 +27,7 @@
 
 %start Main
 %type <Absyn.expr> Main Expr AtExpr Const
+%type <Absyn.expr list> AppExprList
 %type <Absyn.expr> AppExpr
 
 %%
@@ -56,13 +58,13 @@ AtExpr:
     Const                               { $1                     }
   | NAME                                { Var $1                 }
   | LET NAME EQ Expr IN Expr END        { Let($2, $4, $6)        }
-  | LET NAME NAME EQ Expr IN Expr END   { Letfun($2, $3, $5, $7) }
+  | LET NAME NAMELIST EQ Expr IN Expr END   { Letfun($2, $3, $5, $7) }
   | LPAR Expr RPAR                      { $2                     }
 ;
 
 AppExpr:
-    AtExpr AtExpr                       { Call($1, $2)           }
-  | AppExpr AtExpr                      { Call($1, $2)           }
+    AtExpr AppExprList                       { Call($1, $2)           }
+  | AppExpr AppExprList                      { Call($1, $2)           }
 ;
 
 Const:
