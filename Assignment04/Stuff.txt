@@ -1,0 +1,35 @@
+"let add x = let f y = x+y in f end in add 2 5 end"
+
+fromString "let add x = let f y = x+y in f end in let addtwo = add 2 in let x = 77 in addtwo 5 end end end";;
+
+
+
+let add x = (let f y = x+y in f end) in 
+	(let addtwo = add 2 
+	 in (let x = 77 in addtwo 5 end) 
+	 end)
+end 
+
+let f y = x y in f
+
+fromString "let add x = let f y = x+y in 3 end in add 2 end";;
+
+
+
+let f y = 2+y;;
+
+fromString "let add x = fun y -> x+y in add 2 5 end";;
+
+fromString "let add = fun x -> fun y -> x+y in add 2 5 end";;
+
+fromString "let f x = 1 in f f end";;
+
+fromString "let f g = g g in f end";;
+
+fromString "let f x = let g y = y in g false end in f 42 end";;
+
+fromString "let f x = let g y = if true then y else x in g false end in f 42 end";;
+
+fromString "let f x = let g y = if true then y else x in g false end in f true end";;
+
+fromString "";;

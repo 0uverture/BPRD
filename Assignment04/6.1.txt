@@ -1,0 +1,5 @@
+The third program evaluates as expected according to us.  
+
+The fourth program will evaluate to let f y = 2+y.
+
+The outer let body (add 2) calls the add function with 2 as the parameter, which returns a function "let f y = x+y" where x is 2. 
