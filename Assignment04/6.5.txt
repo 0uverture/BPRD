@@ -1,0 +1,39 @@
+1)
+
+	a) Type = int
+
+	b) No type - 
+
+	g = 'a 
+
+	g = ('a ->'b)
+
+	('a ->'b) = 'a 
+
+	c) bool
+
+	d) y has type bool, because g is called with false.
+	   Furthermore g return either x or y, which means that x and y have the same type.
+
+	   Lastly f is called with 42, so x and y would have to be both int and bool, which is not typable in micro-ML.
+
+	e) bool
+
+2) 
+	a) let f x = if x then true else false in f end
+
+	b) "let f x = 3*x in f end"
+
+	c) let f x = let g y = y*x in g end in f end
+
+	d) let f x = let g y = x in g end in f end
+
+	e) let f x = let g y = y in g end in f end
+
+	f) let f x = let g y = let h z = y (x z) in h end in g end in f end
+
+	g) let f x = f x in f end 
+
+	h) Probably not possible, as declaring a variable without declaring the variable as some kind of type, is close to impossible - at least with this syntax...
+
+

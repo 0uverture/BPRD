@@ -22,14 +22,16 @@ fromString "let add x = fun y -> x+y in add 2 5 end";;
 
 fromString "let add = fun x -> fun y -> x+y in add 2 5 end";;
 
-fromString "let f x = 1 in f f end";;
 
-fromString "let f g = g g in f end";;
 
-fromString "let f x = let g y = y in g false end in f 42 end";;
+eval (fromString "let f x = 1 in f f end") [];;
 
-fromString "let f x = let g y = if true then y else x in g false end in f 42 end";;
+eval (fromString "let f g = g g in f end") [];;
 
-fromString "let f x = let g y = if true then y else x in g false end in f true end";;
+eval (fromString "let f x = let g y = y in g false end in f 42 end") [];;
+
+eval (fromString "let f x = let g y = if true then y else x in g false end in f 42 end") [];;
+
+eval (fromString "let f x = let g y = if true then y else x in g false end in f true end") [];;
 
 fromString "";;
