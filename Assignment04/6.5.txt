@@ -20,7 +20,7 @@
 2) 
 	a) let f x = if x then true else false in f end
 
-	b) "let f x = 3*x in f end"
+	b) let f x = 3*x in f end
 
 	c) let f x = let g y = y*x in g end in f end
 
@@ -32,4 +32,4 @@
 
 	g) let f x = f x in f end 
 
-	h) Probably not possible, as declaring a variable without declaring the variable as some kind of type, is close to impossible - at least with this syntax...
+	h) let f x = x in let g y = g y in g f end end
