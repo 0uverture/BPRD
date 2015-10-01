@@ -3,12 +3,10 @@
 	a) Type = int
 
 	b) No type - 
-
-	g = 'a 
-
-	g = ('a ->'b)
-
-	('a ->'b) = 'a 
+	   If g = 'a in  let f g =
+	   then g = ('a ->'b) in g g.
+	   This means we could indefinitely expand the type as 
+	   'a could be expanded into ('a -> 'b) indefinitely.
 
 	c) bool
 
@@ -35,5 +33,3 @@
 	g) let f x = f x in f end 
 
 	h) Probably not possible, as declaring a variable without declaring the variable as some kind of type, is close to impossible - at least with this syntax...
-
-
