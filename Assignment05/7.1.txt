@@ -1,0 +1,48 @@
+Prog
+    [Fundec
+       (null,"main",[(TypI, "n")],
+        Block
+          [Stmt
+             (While
+                (Prim2 (">",Access (AccVar "n"),CstI 0),
+                 Block
+                   [Stmt (Expr (Prim1 ("printi",Access (AccVar "n"))));
+                    Stmt
+                      (Expr
+                         (Assign
+                            (AccVar "n",Prim2 ("-",Access (AccVar "n"),CstI 1))))]));
+           Stmt (Expr (Prim1 ("printc",CstI 10)))])]
+
+
+
+Fundec of typ option * string * (typ * string) list * stmt
+
+typ option = null
+
+string = "main"
+
+(typ * string) list = [(TypI, "n")]
+
+stmt = Block
+          [Stmt
+             (While
+                (Prim2 (">",Access (AccVar "n"),CstI 0),
+                  Block
+                    [Stmt 
+                      (Expr(Prim1("printi", Access(AccVar "n"))));
+                      Stmt
+                        (Expr
+                          (Assign(AccVar "n",Prim2 ("-",Access (AccVar "n"),CstI 1))
+                          )
+                        )
+                    ]
+                )
+              );
+           Stmt (Expr (Prim1 ("printc",CstI 10)))
+          ]
+
+
+Block = stmtordec list
+
+Block = Stmt
+

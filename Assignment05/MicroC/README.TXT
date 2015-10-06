@@ -10,7 +10,7 @@ A. Generating and compiling the lexer and parser for micro-C, and
    can see this is due to a bug in fsyacc, which ignores the %nonassoc
    directives on GT LT GE LE).
 
-   bin\fslex --unicode CLex.fsl
+   fslex --unicode CLex.fsl
    fsyacc --module CPar CPar.fsy
    fsharpi -r ~/fsharp/FsLexYacc.Runtime.dll Absyn.fs CPar.fs CLex.fs Parse.fs Interp.fs ParseAndRun.fs
 
