@@ -9,7 +9,7 @@
 
 void arrsum(int n, int arr[], int *sump){
 	int i;
-	for (i = 0; i < n; i = i + 1){
+	for (i = 0; i < n; ++i){
 		*sump = *sump + arr[i];
 	}
 }
