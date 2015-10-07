@@ -1,9 +1,16 @@
-void arrsum(int n, int arr[], int *sump){
+/*void arrsum(int n, int arr[], int *sump){
 	int i;
 	i = 0;
 	while (i < n){
 		*sump = *sump + arr[i];
 		i = i + 1;
+	}
+}*/
+
+void arrsum(int n, int arr[], int *sump){
+	int i;
+	for (i = 0; i < n; i = i + 1){
+		*sump = *sump + arr[i];
 	}
 }
 
