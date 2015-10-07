@@ -94,14 +94,15 @@ Stmt:
 ;
 
 StmtM:  /* No unbalanced if-else */
-    Expr SEMI                           { Expr($1)             }
-  | RETURN SEMI                         { Return None          }
-  | RETURN Expr SEMI                    { Return(Some($2))     }
-  | Block                               { $1                   }
-  | IF LPAR Expr RPAR StmtM ELSE StmtM  { If($3, $5, $7)       }
-  | WHILE LPAR Expr RPAR StmtM          { While($3, $5)        }
-  | FOR LPAR Stmt SEMI Expr SEMI Stmt RPAR StmtM { Block[$3;Stmt(While($5, Block[$9;$7]))] }
+    Expr SEMI                                    { Expr($1)             }
+  | RETURN SEMI                                  { Return None          }
+  | RETURN Expr SEMI                             { Return(Some($2))     }
+  | Block                                        { $1                   }
+  | IF LPAR Expr RPAR StmtM ELSE StmtM           { If($3, $5, $7)       }
+  | WHILE LPAR Expr RPAR StmtM                   { While($3, $5)        }
+  | FOR LPAR Expr SEMI Expr SEMI Expr RPAR Stmt  { Block[Stmt(Expr($3)); Stmt(While($5, Block[Stmt($9); Stmt(Expr($7))]))] }
 ;
+
 
 StmtU:
     IF LPAR Expr RPAR StmtM ELSE StmtU  { If($3, $5, $7)       }
