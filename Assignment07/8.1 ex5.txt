@@ -1,0 +1,24 @@
+[LDARGS; CALL (1,"L1"); STOP; // void main(int n){}
+
+Label "L1"; 
+
+	INCSP 1; GETBP; CSTI 1; ADD; // int r;
+
+	GETBP; CSTI 0; ADD; LDI; STI; INCSP -1; // r = n;
+
+	INCSP 1; GETBP; CSTI 0; ADD; LDI; GETBP; CSTI 2; ADD; // { int r;
+
+	CALL (2,"L2"); 
+	INCSP -1; GETBP; CSTI 2; ADD; LDI; PRINTI; INCSP -1; // print r;
+	 
+	INCSP -1; GETBP; CSTI 1; ADD; LDI; PRINTI; INCSP -1; // print r;
+
+	INCSP -1; RET 0; // } 
+
+Label "L2"; 
+
+	GETBP; CSTI 1; ADD; LDI; // *rp
+
+	GETBP; CSTI 0; ADD; LDI; GETBP; CSTI 0; ADD; LDI; MUL; STI; INCSP -1; // = i * i;
+
+	INCSP 0; RET 1]
