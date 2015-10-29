@@ -89,7 +89,7 @@ StmtOrDecSeq:
 ;
 
 Case:
-  CASE CSTINT COL LBRACE Expr RBRACE      { Case($2, $5) }
+  CASE CSTINT COL Block      { Case($2, $4) }
 
 CaseSeq:
   /* empty */                 { [] }

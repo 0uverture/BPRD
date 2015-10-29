@@ -128,17 +128,15 @@ let rec cStmt stmt (varEnv : varEnv) (funEnv : funEnv) : instr list =
       [GOTO labtest; Label labbegin] @ cStmt body varEnv funEnv
       @ [Label labtest] @ cExpr e varEnv funEnv @ [IFNZRO labbegin]
     | Switch(e, (cases : case list)) ->
-        let rec labelfier = 
-        match cases with
-        | case :: [] -> 
-        cExpr e varEnv funEnv @ [LDI]
-
-
-        match e with
-        | Access acc ->
-        match List.tryFind(fun x -> fst x = fe) cases with
-            | Some(n, sExpr) -> cExpr sExpr varEnv funEnv @ [INCSP -1]
-            | None -> raise (Failure "Switch statement had no match")
+        let endLabel = newLabel()
+        let eve = cExpr e varEnv funEnv
+        let rec loop (cases : case list) =
+            match cases with
+            | Case(i, stmt) :: [] -> [DUP; CSTI i; EQ; IFZERO endLabel] @ cStmt stmt varEnv funEnv
+            | Case(i, stmt) :: cs ->
+                let nextCaseLabel = newLabel()
+                [DUP; CSTI i; EQ; IFZERO nextCaseLabel] @ cStmt stmt varEnv funEnv @ [GOTO endLabel] @ [Label nextCaseLabel] @ (loop cs) 
+        eve @ (loop cases) @ [Label endLabel; INCSP -1]
     | Expr e -> 
       cExpr e varEnv funEnv @ [INCSP -1]
     | Block stmts -> 

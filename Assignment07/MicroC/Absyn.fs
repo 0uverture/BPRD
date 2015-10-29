@@ -45,7 +45,7 @@ and stmtordec =
   | Stmt of stmt                     (* A statement                 *)
 
 and case =
-  | Case of int * expr
+  | Case of int * stmt
 
 and topdec = 
   | Fundec of typ option * string * (typ * string) list * stmt
