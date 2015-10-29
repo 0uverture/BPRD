@@ -16,6 +16,7 @@ type typ =
 and expr =                                                         
   | Access of access                 (* x    or  *p    or  a[e]     *)
   | Assign of access * expr          (* x=e  or  *p=e  or  a[e]=e   *)
+  | QueCol of expr * expr * expr     (*? :*)
   | Addr of access                   (* &x   or  &*p   or  &a[e]    *)
   | CstI of int                      (* Constant                    *)
   | Prim1 of string * expr           (* Unary primitive operator    *)
@@ -37,10 +38,14 @@ and stmt =
   | Expr of expr                     (* Expression statement   e;   *)
   | Return of expr option            (* Return from method          *)
   | Block of stmtordec list          (* Block: grouping and scope   *)
+  | Switch of expr * case list
                                                                    
 and stmtordec =                                                    
   | Dec of typ * string              (* Local variable declaration  *)
   | Stmt of stmt                     (* A statement                 *)
+
+and case =
+  | Case of int * expr
 
 and topdec = 
   | Fundec of typ option * string * (typ * string) list * stmt

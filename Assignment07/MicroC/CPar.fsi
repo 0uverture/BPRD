@@ -15,6 +15,8 @@ type token =
   | NOT
   | SEQOR
   | SEQAND
+  | QUE
+  | COL
   | EQ
   | NE
   | GT
@@ -38,6 +40,8 @@ type token =
   | RETURN
   | VOID
   | WHILE
+  | SWITCH
+  | CASE
   | CSTSTRING of (string)
   | NAME of (string)
   | CSTINT of (int)
@@ -57,6 +61,8 @@ type tokenId =
     | TOKEN_NOT
     | TOKEN_SEQOR
     | TOKEN_SEQAND
+    | TOKEN_QUE
+    | TOKEN_COL
     | TOKEN_EQ
     | TOKEN_NE
     | TOKEN_GT
@@ -80,6 +86,8 @@ type tokenId =
     | TOKEN_RETURN
     | TOKEN_VOID
     | TOKEN_WHILE
+    | TOKEN_SWITCH
+    | TOKEN_CASE
     | TOKEN_CSTSTRING
     | TOKEN_NAME
     | TOKEN_CSTINT
@@ -98,6 +106,8 @@ type nonTerminalId =
     | NONTERM_Paramdecs1
     | NONTERM_Block
     | NONTERM_StmtOrDecSeq
+    | NONTERM_Case
+    | NONTERM_CaseSeq
     | NONTERM_Stmt
     | NONTERM_StmtM
     | NONTERM_StmtU
