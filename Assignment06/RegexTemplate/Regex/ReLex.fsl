@@ -1,0 +1,15 @@
+﻿{
+module ReLex
+
+open Microsoft.FSharp.Text.Lexing
+
+open RePar
+
+let lexemeAsString lexbuf =
+    LexBuffer<char>.LexemeString lexbuf
+}
+
+rule Token = parse
+   | [' ' '\t' '\r'] { Token lexbuf }
+   | '\n'            { lexbuf.EndPos <- lexbuf.EndPos.NextLine; Token lexbuf }
+   | _               { failwith "Lexer error: illegal symbol" }

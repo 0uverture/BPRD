@@ -1,0 +1,12 @@
+﻿%{
+ open Absyn;
+%}
+
+%token EOF
+%start Main
+%type <Absyn.re> Main
+%%
+
+Main:
+  EOF { (* ... *) }
+;
