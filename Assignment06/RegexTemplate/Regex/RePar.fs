@@ -107,8 +107,8 @@ let _fsyacc_sparseGotoTableRowOffsets = [|0us; 1us; 3us; |]
 let _fsyacc_stateToProdIdxsTableElements = [| 1us; 0us; 1us; 0us; 4us; 1us; 5us; 6us; 7us; 1us; 1us; 1us; 2us; 1us; 3us; 4us; 3us; 5us; 6us; 7us; 1us; 3us; 1us; 4us; 4us; 5us; 5us; 6us; 7us; 4us; 5us; 6us; 7us; 7us; 1us; 6us; 1us; 7us; |]
 let _fsyacc_stateToProdIdxsTableRowOffsets = [|0us; 2us; 4us; 9us; 11us; 13us; 15us; 20us; 22us; 24us; 29us; 34us; 36us; |]
 let _fsyacc_action_rows = 13
-let _fsyacc_actionTableElements = [|3us; 32768us; 1us; 8us; 5us; 5us; 7us; 4us; 0us; 49152us; 6us; 32768us; 0us; 3us; 1us; 8us; 3us; 11us; 4us; 12us; 5us; 5us; 7us; 4us; 0us; 16385us; 0us; 16386us; 3us; 32768us; 1us; 8us; 5us; 5us; 7us; 4us; 6us; 32768us; 1us; 8us; 3us; 11us; 4us; 12us; 5us; 5us; 6us; 7us; 7us; 4us; 0us; 16387us; 0us; 16388us; 5us; 16389us; 1us; 8us; 3us; 11us; 4us; 12us; 5us; 5us; 7us; 4us; 5us; 16391us; 1us; 8us; 3us; 11us; 4us; 12us; 5us; 5us; 7us; 4us; 0us; 16390us; 3us; 32768us; 1us; 8us; 5us; 5us; 7us; 4us; |]
-let _fsyacc_actionTableRowOffsets = [|0us; 4us; 5us; 12us; 13us; 14us; 18us; 25us; 26us; 27us; 33us; 39us; 40us; |]
+let _fsyacc_actionTableElements = [|3us; 32768us; 1us; 8us; 5us; 5us; 7us; 4us; 0us; 49152us; 6us; 32768us; 0us; 3us; 1us; 8us; 3us; 11us; 4us; 12us; 5us; 5us; 7us; 4us; 0us; 16385us; 0us; 16386us; 3us; 32768us; 1us; 8us; 5us; 5us; 7us; 4us; 6us; 32768us; 1us; 8us; 3us; 11us; 4us; 12us; 5us; 5us; 6us; 7us; 7us; 4us; 0us; 16387us; 0us; 16388us; 4us; 16389us; 1us; 8us; 3us; 11us; 5us; 5us; 7us; 4us; 4us; 16391us; 1us; 8us; 3us; 11us; 5us; 5us; 7us; 4us; 0us; 16390us; 3us; 32768us; 1us; 8us; 5us; 5us; 7us; 4us; |]
+let _fsyacc_actionTableRowOffsets = [|0us; 4us; 5us; 12us; 13us; 14us; 18us; 25us; 26us; 27us; 32us; 37us; 38us; |]
 let _fsyacc_reductionSymbolCounts = [|1us; 2us; 1us; 3us; 1us; 2us; 2us; 3us; |]
 let _fsyacc_productionToNonTerminalTable = [|0us; 1us; 2us; 2us; 2us; 2us; 2us; 2us; |]
 let _fsyacc_immediateActions = [|65535us; 49152us; 65535us; 16385us; 16386us; 65535us; 65535us; 16387us; 16388us; 65535us; 65535us; 16390us; 65535us; |]
@@ -173,7 +173,7 @@ let _fsyacc_reductions ()  =    [|
                 (
                    (
 # 25 "RePar.fsy"
-                                                Seq(_1, _2) 
+                                                  Seq(_1, _2) 
                    )
 # 25 "RePar.fsy"
                  : Absyn.re));
