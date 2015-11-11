@@ -2,13 +2,28 @@
 module RePar
 type token = 
   | EOF
+  | EPS
+  | SEQ
+  | STAR
+  | CHOICE
+  | LPAR
+  | RPAR
+  | NAME of (char)
 type tokenId = 
     | TOKEN_EOF
+    | TOKEN_EPS
+    | TOKEN_SEQ
+    | TOKEN_STAR
+    | TOKEN_CHOICE
+    | TOKEN_LPAR
+    | TOKEN_RPAR
+    | TOKEN_NAME
     | TOKEN_end_of_input
     | TOKEN_error
 type nonTerminalId = 
     | NONTERM__startMain
     | NONTERM_Main
+    | NONTERM_Re
 /// This function maps tokens to integer indexes
 val tagOfToken: token -> int
 
@@ -20,4 +35,4 @@ val prodIdxToNonTerminal: int -> nonTerminalId
 
 /// This function gets the name of a token as a string
 val token_to_string: token -> string
-val Main : (Microsoft.FSharp.Text.Lexing.LexBuffer<'cty> -> token) -> Microsoft.FSharp.Text.Lexing.LexBuffer<'cty> -> (unit) 
+val Main : (Microsoft.FSharp.Text.Lexing.LexBuffer<'cty> -> token) -> Microsoft.FSharp.Text.Lexing.LexBuffer<'cty> -> (Absyn.re) 

@@ -2,11 +2,27 @@
  open Absyn;
 %}
 
-%token EOF
+%token <char> NAME
+
+%token EOF EPS SEQ STAR CHOICE LPAR RPAR
+
+%nonassoc CHOICE
+%nonassoc SEQ
+%nonassoc STAR
+
 %start Main
-%type <Absyn.re> Main
+%type <Absyn.re> Main Re
 %%
 
 Main:
-  EOF { (* ... *) }
+  Re EOF { $1 }
+;
+
+Re:
+	| NAME                  { Char $1 }
+	| LPAR Re RPAR          { $2 }
+    | EPS                   { Eps }
+	| Re Re                 { Seq($1, $2) }
+	| Re STAR               { Star $1 }
+	| Re CHOICE Re          { Choice($1, $3) }
 ;

@@ -3,13 +3,20 @@ module ReLex
 
 open Microsoft.FSharp.Text.Lexing
 
-open RePar
+open RePar;
 
 let lexemeAsString lexbuf =
     LexBuffer<char>.LexemeString lexbuf
 }
 
 rule Token = parse
-   | [' ' '\t' '\r'] { Token lexbuf }
-   | '\n'            { lexbuf.EndPos <- lexbuf.EndPos.NextLine; Token lexbuf }
-   | _               { failwith "Lexer error: illegal symbol" }
+   | [' ' '\t' '\r']  { Token lexbuf }
+   | '\n'             { lexbuf.EndPos <- lexbuf.EndPos.NextLine; Token lexbuf }
+   | "eps"            { EPS }
+   | ['a'-'z''A'-'Z'] { NAME (lexemeAsString lexbuf).Chars(0) }
+   | '*'              { STAR }
+   | '|'              { CHOICE }
+   | '('              { LPAR }
+   | ')'              { RPAR }
+   | eof              { EOF }
+   | _                { failwith "Lexer error: illegal symbol" }
