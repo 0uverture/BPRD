@@ -22,7 +22,7 @@ Re:
 	| NAME                  { Char $1 }
 	| LPAR Re RPAR          { $2 }
     | EPS                   { Eps }
-	| Re Re %prec SEQ         { Seq($1, $2) }
+	| Re Re %prec SEQ       { Seq($1, $2) }
 	| Re STAR               { Star $1 }
 	| Re CHOICE Re          { Choice($1, $3) }
 ;

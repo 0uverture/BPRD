@@ -1,0 +1,35 @@
+a.
+fromString(" a | b * ");;
+Choice( Char(a), Star( Char(b) ) )
+
+Da Star binder stærkere end Choice bliver det til (a)|(b*) hvilket også er ovenstående resultat.
+
+b.
+fromString(" a|b* ");;
+Choice( Char(a), Star( Char(b) ) )
+
+Samme som regex strengen fra a, bare uden whitespace. Burde derfor også give samme resultat.
+
+c.
+fromString(" a * a a ");;
+Seq( Star( Char(a) ), Seq( Char(a), Char(a) ) )
+
+Da Star binder stærkere end Sequence, bliver det til ((a*) (a a))
+
+d.
+fromString(" a b * | c ");;
+Choice( Seq( Char(a), Star( Char(b) ) ), Char(c) )
+
+Da Star > Seq > Choice bliver det til ((a (b*)) | c)
+
+e.
+fromString(" ( a ( b * ) | c) ");;
+Seq( Char(a), Choice( Star( Char(b) ), Char(c) ) )
+
+Præcis som vist i d.
+
+f.
+fromString(" ( ( a  b ) * | b ) * ");; 
+Star( Choice( Star( Seq( Char(a), Char(b) ) ), Char(b) ) )
+
+Bliver, pudsigt nok, præcist til det der står.
