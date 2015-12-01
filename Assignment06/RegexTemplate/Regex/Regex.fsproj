@@ -74,7 +74,6 @@
     <Compile Include="RePar.fsi" />
     <Compile Include="RePar.fs" />
     <Compile Include="ReLex.fs" />
-    <None Include="Script1.fsx" />
     <Compile Include="Parse.fs" />
   </ItemGroup>
   <ItemGroup>
