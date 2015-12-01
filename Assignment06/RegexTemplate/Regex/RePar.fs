@@ -173,7 +173,7 @@ let _fsyacc_reductions ()  =    [|
                 (
                    (
 # 25 "RePar.fsy"
-                                                  Seq(_1, _2) 
+                                                Seq(_1, _2) 
                    )
 # 25 "RePar.fsy"
                  : Absyn.re));
