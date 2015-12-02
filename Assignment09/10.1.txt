@@ -1,14 +1,18 @@
 i)
 
 	ADD:
+
 	CSTI i:
+
 	NIL:
+
 	IFZERO:
+
 	CONS:
+
 	CAR:
+
 	SETCAR: 
-
-
 
 ii)
 	Length:
