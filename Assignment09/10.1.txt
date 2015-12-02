@@ -1,7 +1,21 @@
 i)
 
-ii)
+	ADD:
+	CSTI i:
+	NIL:
+	IFZERO:
+	CONS:
+	CAR:
+	SETCAR: 
 
+
+
+ii)
+	Length:
+	
+	Color:
+
+	Paint:
 
 iii)
 
